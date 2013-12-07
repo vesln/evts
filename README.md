@@ -25,7 +25,7 @@ evts.on('test', function(arg, done) {
   done();
 });
 
-events.emit('test', 'someting important', function() {
+events.emit('test', 'something important', function() {
   // done!
 });
 ```
