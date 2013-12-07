@@ -16,11 +16,11 @@ handlers.
 var EventEmitter = require('evts');
 var events = new EventEmitter;
 
-evts.on('test', function(arg) {
+events.on('test', function(arg) {
   // sync
 });
 
-evts.on('test', function(arg, done) {
+events.on('test', function(arg, done) {
   // async
   done();
 });
