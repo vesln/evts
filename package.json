@@ -1,6 +1,6 @@
 {
   "name": "evts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Minimal event emitter implementation that supports both sync and async event handlers.",
   "main": "./lib/evts.js",
   "homepage": "https://github.com/vesln/evts",
