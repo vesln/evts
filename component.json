@@ -2,7 +2,7 @@
   "name": "evts",
   "repo": "vesln/evts",
   "description": "Minimal event emitter implementation that supports both sync and async event handlers.",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "license": "MIT",
   "main": "lib/evts.js",
   "scripts": [
