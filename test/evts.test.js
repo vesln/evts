@@ -75,6 +75,67 @@ describe('evts', function() {
     });
   });
 
+  it('handle async errors', function(done) {
+    var evts = new EventEmitter;
+    var actual = [];
+    var expected = [1, 1];
+
+    evts.on('test', function(arg) {
+      actual.push(arg);
+    });
+
+    evts.on('test', function(arg, done) {
+      actual.push(arg);
+      done(new Error());
+    });
+
+    evts.on('test', function(arg) {
+      actual.push(arg);
+    });
+
+    evts.on('test', function(arg, done) {
+      actual.push(arg);
+      done();
+    });
+
+    evts.emit('test', 1, function(err) {
+      err.should.be.instanceof(Error);
+      actual.should.eql(expected);
+      done();
+    });
+  });
+
+  it('handle sync errors', function(done) {
+    var evts = new EventEmitter;
+    var actual = [];
+    var expected = [1, 1];
+
+    evts.on('test', function(arg, done) {
+      actual.push(arg);
+      done();
+    });
+
+    evts.on('test', function(arg) {
+      actual.push(arg);
+      throw new Error();
+    });
+
+    evts.on('test', function(arg, done) {
+      actual.push(arg);
+      done();
+    });
+
+    evts.on('test', function(arg) {
+      actual.push(arg);
+    });
+
+    evts.emit('test', 1, function(err) {
+      err.should.be.instanceof(Error);
+      actual.should.eql(expected);
+      done();
+    });
+  });
+
   it('works as expected when there are no listeners', function(done) {
     var evts = new EventEmitter;
 
