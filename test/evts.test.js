@@ -143,4 +143,26 @@ describe('evts', function() {
       done();
     });
   });
+
+  it('supports once listeners', function() {
+    var evts = new EventEmitter;
+    var actual = [];
+    var expected = [1, 2, 3, 1, 3];
+
+    evts.on('test', function() {
+      actual.push(1);
+    });
+    evts.once('test', function() {
+      actual.push(2);
+    });
+    evts.on('test', function() {
+      actual.push(3);
+    });
+
+    evts.emit('test', function() {
+      evts.emit('test', function() {
+        actual.should.eql(expected);
+      });
+    });
+  });
 });
