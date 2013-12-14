@@ -194,4 +194,22 @@ describe('evts', function() {
       });
     });
   });
+
+  it('allows emit without a callback', function() {
+    var evts = new EventEmitter;
+    var actual = [];
+    var expected = [1, 1];
+
+    evts.on('test', function(arg) {
+      actual.push(arg);
+    });
+
+    evts.on('test', function(arg, done) {
+      actual.push(arg);
+      done();
+    });
+
+    evts.emit('test', 1);
+    actual.should.eql(expected);
+  });
 });
